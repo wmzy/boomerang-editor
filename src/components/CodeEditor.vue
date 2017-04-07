@@ -32,7 +32,7 @@
   import 'codemirror/addon/fold/brace-fold';
   import 'codemirror/addon/fold/foldcode';
 
-  import URLON from 'URLON';
+  import URLON from 'urlon';
 
   export default {
     name: 'codeEditor',
