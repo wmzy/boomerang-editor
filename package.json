@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "URLON": "^2.0.0",
     "codemirror": "^5.25.0",
     "vue": "^2.2.2",
     "vue-codemirror": "^3.0.3",

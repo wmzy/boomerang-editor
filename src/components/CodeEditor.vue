@@ -1,5 +1,8 @@
 <template>
-  <codemirror v-model="code" :options="editorOptions" @ready="onReady"></codemirror>
+  <div>
+    <a :href="url">{{ url }}</a>
+    <codemirror v-model="code" :options="editorOptions" @ready="onReady"></codemirror>
+  </div>
 </template>
 
 <script>
@@ -29,10 +32,13 @@
   import 'codemirror/addon/fold/brace-fold';
   import 'codemirror/addon/fold/foldcode';
 
+  import URLON from 'URLON';
+
   export default {
     name: 'codeEditor',
     data() {
       return {
+        host: 'http://wmzy-json-server.daoapp.io/',
         code: JSON.stringify({
           foo: 'bar'
         }, null, '  '),
@@ -66,6 +72,15 @@
     methods: {
       onReady(codeMirror) {
         codeMirror.on('keyup', cm => cm.execCommand('autocomplete'));
+      }
+    },
+    computed: {
+      url() {
+        try {
+          return `${this.host}raw/${URLON.stringify(JSON.parse(this.code))}`;
+        } catch (e) {
+          return '#';
+        }
       }
     },
     components: {
