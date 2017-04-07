@@ -13,7 +13,9 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "codemirror": "^5.25.0",
     "vue": "^2.2.2",
+    "vue-codemirror": "^3.0.3",
     "vue-router": "^2.2.0"
   },
   "devDependencies": {
