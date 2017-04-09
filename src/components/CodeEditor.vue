@@ -38,7 +38,7 @@
     name: 'codeEditor',
     data() {
       return {
-        host: 'http://wmzy-json-server.daoapp.io/',
+        host: 'http://boomerang.daoapp.io/',
         code: JSON.stringify({
           foo: 'bar'
         }, null, '  '),
@@ -77,7 +77,7 @@
     computed: {
       url() {
         try {
-          return `${this.host}raw/${URLON.stringify(JSON.parse(this.code))}`;
+          return `${this.host}api/v1/raw/${URLON.stringify(JSON.parse(this.code))}`;
         } catch (e) {
           return '#';
         }
