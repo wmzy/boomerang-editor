@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div>
+      <label>host: <select v-model="host">
+        <option v-for="host in hosts">{{ host }}</option>
+      </select></label>
+    </div>
     <a :href="url">{{ url }}</a>
     <codemirror v-model="code" :options="editorOptions" @ready="onReady"></codemirror>
   </div>
@@ -32,13 +37,16 @@
   import 'codemirror/addon/fold/brace-fold';
   import 'codemirror/addon/fold/foldcode';
 
+  import _ from 'lodash';
   import URLON from 'urlon';
+  import hosts from '../config/hosts';
 
   export default {
     name: 'codeEditor',
     data() {
       return {
-        host: 'http://boomerang.daoapp.io/',
+        host: _.sample(hosts),
+        hosts,
         code: JSON.stringify({
           foo: 'bar'
         }, null, '  '),
@@ -93,6 +101,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
+  select {
+    width: 200px;
+  }
 </style>
