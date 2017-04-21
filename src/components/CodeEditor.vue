@@ -1,11 +1,18 @@
 <template>
   <div>
     <div>
+      type:
+      <label v-for="t in types">
+        <input type="radio" :value="t" v-model="type">
+        {{ t }}
+      </label>
+    </div>
+    <div>
       <label>host: <select v-model="host">
         <option v-for="host in hosts">{{ host }}</option>
       </select></label>
     </div>
-    <a :href="url">{{ url }}</a>
+    <a :href="url" target="_blank">{{ url }}</a>
     <codemirror v-model="code" :options="editorOptions" @ready="onReady"></codemirror>
   </div>
 </template>
@@ -45,6 +52,8 @@
     name: 'codeEditor',
     data() {
       return {
+        type: 'raw',
+        types: ['raw', 'schema'],
         host: _.sample(hosts),
         hosts,
         code: JSON.stringify({
@@ -85,7 +94,7 @@
     computed: {
       url() {
         try {
-          return `${this.host}api/v1/raw/${URLON.stringify(JSON.parse(this.code))}`;
+          return `${this.host}api/v1/${this.type}/${URLON.stringify(JSON.parse(this.code))}`;
         } catch (e) {
           return '#';
         }
