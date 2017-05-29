@@ -7,6 +7,7 @@
         {{ t }}
       </label>
     </div>
+    A <a href="https://json-schema-editor.tangramjs.com/editor.html" target="_blank">JSON schema editor</a> maybe useful.
     <div>
       <label>host: <select v-model="host">
         <option v-for="host in hosts">{{ host }}</option>
@@ -88,7 +89,10 @@
     },
     methods: {
       onReady(codeMirror) {
-        codeMirror.on('keyup', cm => cm.execCommand('autocomplete'));
+        codeMirror.on('keyup', (cm, e) => {
+          console.log(/[a-zA-Z]/.test(e.key), e.key, e);
+          if (/^[a-zA-Z]$/.test(e.key)) cm.execCommand('autocomplete');
+        });
       }
     },
     computed: {
